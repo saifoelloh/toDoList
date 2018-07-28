@@ -1,3 +1,9 @@
 .list-group-item:hover {
     background-color: aliceblue;
 }
+.bungkus-input {
+    width: 60%;
+}
+#kotak-edit {
+    display: none;
+}
