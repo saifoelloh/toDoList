@@ -12,15 +12,22 @@
   </head>
   <body>
     <div id="root" class="m-4">
-      <h1 class="text-center display-1">To do List</h1>
-      <input type="text" id="input-user" placeholder="Masukan Kegiatan">
-      <button class="btn btn-primary" id="tombol-submit" type="submit">Submit</button>
-      <div class="container">
-        <ul id="to-do-list" class="list-group">
-        </ul>
+      <a href="">
+        <h1 class="text-center display-1">To do List</h1>
+      </a>
+      <div class="container p-4 bungkus-input">
+        <div class="my-4 text-center">
+          <input type="text" id="input-user" placeholder="Masukan Kegiatan">
+          <button class="btn btn-primary" id="tombol-submit" type="submit">Submit</button>
+        </div>
+        <div class="text-center my-4" id="kotak-edit">
+          <input type="text" name="" id="input-ubah"/>
+          <button class="btn btn-light" id="tombol-save">Save</button>
+        </div>
+        <ul id="to-do-list" class="list-group"> </ul>
       </div>
     </div>
-
+    
     <!-- Optional JavaScript -->
     <script>
 
@@ -28,6 +35,10 @@
       const masukan = document.getElementById("input-user")
       const tombol = document.getElementById("tombol-submit")
       const listItem = document.getElementById("to-do-list")
+      const btnUbah = document.getElementsByClassName("tombolUbah")
+      const btnHapus = document.getElementsByClassName("tombolHapus")
+      const btnSimpan = document.getElementById("tombol-save")
+      const kotakUbah = document.getElementById("input-ubah")
 
       localPlace = JSON.parse(localStorage.getItem('boxer'))
       if(localPlace!=null)
@@ -44,9 +55,38 @@
       function cetak(){
         let temp = ""
         for(let i=0;i<data.length;i++)
-          temp += `<li class="list-group-item"> ${data[i]} </li>`
+          temp += ` <li class="list-group-item">
+                      <div class="d-flex">
+                        <p class="flex-grow-1">
+                          ${data[i]}
+                        </p>
+                        <button class="tombolUbah btn btn-warning mx-1">Edit</button>
+                        <button class="tombolHapus btn btn-danger mx-1">Delete</button>
+                      </div>
+                    </li> `
         listItem.innerHTML = temp
       }
+
+      for(let i=0;i<data.length;i++){
+        btnUbah[i].addEventListener("click",function(){
+          $('#kotak-edit').show()
+          kotakUbah.value = data[i]
+          ubahNama = data[i]
+          console.log(ubahNama)
+        })
+      }
+
+      btnSimpan.addEventListener("click", function(){
+        for(let i=0;i<data.length;i++){
+          if(ubahNama==data[i]){
+            let temp = kotakUbah.value
+            localPlace[i] = kotakUbah.value
+            data = localPlace
+            $('#kotak-edit').hide()
+          }
+        }
+      })
+
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
