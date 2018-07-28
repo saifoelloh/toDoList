@@ -51,7 +51,7 @@
         data.push(masukan.value)
         localStorage.setItem('boxer', JSON.stringify(data))
         console.log(data)
-        $('#pesan-tambah').show()
+        $('#pesan-tambah').fadeToggle(1000)
         cetak()
       })
 
@@ -86,7 +86,7 @@
             data[i] = temp
             localStorage.setItem('boxer',JSON.stringify(data))
             $('#kotak-edit').hide()
-            $('#pesan-ubah').show()
+            // $('#pesan-ubah').show()
             cetak()
             console.log(temp)
           }
@@ -97,7 +97,8 @@
         btnHapus[i].addEventListener("click", function(){
           data.splice(i,1)
           localStorage.setItem('boxer',JSON.stringify(data))
-          $('#pesan-hapus').show()
+          $('#pesan-hapus').fadeIn(1000)
+          location.reload()
           cetak()
           console.log(data)
         })
