@@ -1,6 +1,9 @@
 #judul:hover {
     text-decoration: none;
 }
+.input-group{
+    width: 50%;
+}
 #pesan-tambah {
     display: none;
 }
