@@ -21,5 +21,7 @@
 }
 #kotak-edit {
     display: none;
-    width: 60%;
+}
+#pesan {
+    display: none;
 }
