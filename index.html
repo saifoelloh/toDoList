@@ -12,7 +12,7 @@
   </head>
   <body>
     <div id="root" class="m-4">
-      <a href="">
+      <a href="" id="judul">
         <h1 class="text-center display-1">To do List</h1>
       </a>
       <div class="container p-4 bungkus-input">
@@ -27,7 +27,6 @@
         <ul id="to-do-list" class="list-group"> </ul>
       </div>
     </div>
-    
     <!-- Optional JavaScript -->
     <script>
 
@@ -57,9 +56,9 @@
         for(let i=0;i<data.length;i++)
           temp += ` <li class="list-group-item">
                       <div class="d-flex">
-                        <p class="flex-grow-1">
+                        <div class="flex-grow-1 align-middle">
                           ${data[i]}
-                        </p>
+                        </div>
                         <button class="tombolUbah btn btn-warning mx-1">Edit</button>
                         <button class="tombolHapus btn btn-danger mx-1">Delete</button>
                       </div>
@@ -80,12 +79,23 @@
         for(let i=0;i<data.length;i++){
           if(ubahNama==data[i]){
             let temp = kotakUbah.value
-            localPlace[i] = kotakUbah.value
-            data = localPlace
+            data[i] = temp
+            localStorage.setItem('boxer',JSON.stringify(data))
             $('#kotak-edit').hide()
+            cetak()
+            console.log(temp)
           }
         }
       })
+
+      for(let i=0;i<data.length;i++){
+        btnHapus[i].addEventListener("click", function(){
+          data.splice(i,1)
+          localStorage.setItem('boxer',JSON.stringify(data))
+          cetak()
+          console.log(data)
+        })
+      }
 
     </script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
