@@ -24,6 +24,9 @@
           <input type="text" name="" id="input-ubah"/>
           <button class="btn btn-light" id="tombol-save">Save</button>
         </div>
+        <div id="pesan-tambah" class="alert alert-success" role="alert">Data berhasil ditambahkan</div>
+        <div id="pesan-ubah" class="alert alert-success" role="alert">Data berhasil diubah</div>
+        <div id="pesan-hapus" class="alert alert-success" role="alert">Data berhasil dihapus</div>
         <ul id="to-do-list" class="list-group"> </ul>
       </div>
     </div>
@@ -48,6 +51,7 @@
         data.push(masukan.value)
         localStorage.setItem('boxer', JSON.stringify(data))
         console.log(data)
+        $('#pesan-tambah').show()
         cetak()
       })
 
@@ -82,6 +86,7 @@
             data[i] = temp
             localStorage.setItem('boxer',JSON.stringify(data))
             $('#kotak-edit').hide()
+            $('#pesan-ubah').show()
             cetak()
             console.log(temp)
           }
@@ -92,6 +97,7 @@
         btnHapus[i].addEventListener("click", function(){
           data.splice(i,1)
           localStorage.setItem('boxer',JSON.stringify(data))
+          $('#pesan-hapus').show()
           cetak()
           console.log(data)
         })
