@@ -1,27 +1,9 @@
-#judul:hover {
-    text-decoration: none;
-}
-.input-group{
+.kotak-input {
     width: 50%;
 }
-#pesan-tambah {
-    display: none;
-}
-#pesan-ubah {
-    display: none;
-}
-#pesan-hapus {
-    display: none;
-}
-.list-group-item:hover {
-    background-color: aliceblue;
-}
-.bungkus-input {
-    width: 60%;
-}
-#kotak-edit {
-    display: none;
-}
-.pesan {
-    display: none;
+
+@media only screen and (max-width: 600px) {
+    .kotak-input {
+        width: 100%;
+    }
 }
