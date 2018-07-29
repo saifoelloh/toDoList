@@ -15,18 +15,22 @@
 
   <body>
     <div id="root" class="m-4">
+
       <a href="" id="judul">
         <h1 class="text-center display-1">To do List</h1>
       </a>
+
       <div id="utama" class="container p-4 bungkus-input">
+
         <div class="d-flex justify-content-center">
           <div class="my-4 input-group">
-            <input class="form-control" type="text" id="input-user" placeholder="Masukan Kegiatan">
+            <input class="form-control" type="text" id="input-user" placeholder="Masukan Kegiatan"/>
             <div class="input-group-append">
               <button class="btn btn-primary" id="tombol-submit" type="submit">Submit</button>
             </div>
           </div>
         </div>
+
         <!-- <form>
           <div id="kotak-edit" class="input-group">
           <input class="form-control" type="text" name="" id="input-ubah" />
@@ -46,35 +50,52 @@
           <!-- <div id="pesan-tambah" class="alert alert-success" role="alert">Data berhasil ditambahkan</div> -->
           <!-- <div id="pesan-ubah" class="alert alert-success" role="alert">Data berhasil diubah</div> -->
           <!-- <div id="pesan-hapus" class="alert alert-success" role="alert">Data berhasil dihapus</div> -->
-          <div id="pesan" class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+
+          <div id="pesan-tambah" class="pesan alert alert-success alert-dismissible fade show" role="alert">
+            <strong id="data-pesan-tambah"></strong> Sukses di-tambah
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <ul id="to-do-list" class="list-group">
-          </ul>
+
+          <div id="pesan-ubah" class="pesan alert alert-success alert-dismissible fade show" role="alert">
+            <strong id="data-pesan-ubah"></strong> Sukses di-ubah menjadi <strong id="data-pesan-ubah2"></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div id="pesan-delete" class="pesan alert alert-success alert-dismissible fade show" role="alert">
+            <strong id="data-pesan-delete"></strong> Sukses di-hapus
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <ul id="to-do-list" class="list-group"> </ul>
       </div>
     </div>
 
     <!-- Optional JavaScript -->
     <script>
 
-      <!-- Main Array -->
+      // Main Array
       let data = []
 
-      <!-- InputBox -->
+      // InputBox
       const masukan = document.getElementById("input-user")
       const kotakUbah = document.getElementById("input-ubah")
+      const pesanTambah = document.getElementById("data-pesan-tambah")
+      const pesanUbah = document.getElementById("data-pesan-ubah")
+      const pesanUbah2 = document.getElementById("data-pesan-ubah2")
+      const pesanDelete = document.getElementById("data-pesan-delete")
 
-      <!-- Button Collection -->
+      // Button Collection
       const tombol = document.getElementById("tombol-submit")
       const btnUbah = document.getElementsByClassName("tombolUbah")
       const btnHapus = document.getElementsByClassName("tombolHapus")
       const btnSimpan = document.getElementById("tombol-save")
 
-      <!-- List Item -->
-      const mainBox = document.getElementById("utama")
+      // List Item
       const listItem = document.getElementById("to-do-list")
 
       localPlace = JSON.parse(localStorage.getItem('boxer'))
@@ -83,35 +104,34 @@
       cetak()
 
       tombol.addEventListener("click", function () {
-        let temp = '';
+        // let temp = '';
         data.push(masukan.value)
-        temp =  ` <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>${masukan.value}</strong> berhasil ditambahkan
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div> `
-        mainBox.innerHTML = temp
+        // temp =  ` <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        //             <strong>${masukan.value}</strong> berhasil ditambahkan
+        //             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        //               <span aria-hidden="true">&times;</span>
+        //             </button>
+        //           </div> `
+        // mainBox.innerHTML = temp
         localStorage.setItem('boxer', JSON.stringify(data))
+        pesanTambah.innerHTML = masukan.value
+        $('#pesan-tambah').show()
         console.log(data)
         cetak()
       })
 
       function cetak() {
         let temp = ""
-        for (let i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++)
             temp += ` <li class="list-group-item">
                           <div class="d-flex">
-                              <div class="flex-grow-1">
-                                  <p class="align-middle">
-                                      ${data[i]}
-                                  </p>
-                              </div>
+                              <p class="flex-grow-1">
+                                ${data[i]}
+                              </p>
                               <button class="tombolUbah btn btn-warning mx-1" onclick="ubahData(${i})">Edit</button>
                               <button class="tombolHapus btn btn-danger mx-1" onclick="hapusData(${i})">Delete</button>
                           </div>
                       </li> `
-        }
         listItem.innerHTML = temp
       }
 
@@ -144,8 +164,10 @@
       btnSimpan.addEventListener("click", function () {
         data[indexData] = kotakUbah.value
         localStorage.setItem('boxer', JSON.stringify(data))
-        cetak()
+        pesanUbah.innerHTML = ubahNama
+        $('#pesan-ubah').show()
         $('#kotak-edit').hide(1000)
+        cetak()
       })
 
       // for(let i=0;i<data.length;i++){
@@ -160,6 +182,10 @@
         data.splice(i, 1)
         localStorage.setItem('boxer', JSON.stringify(data))
         cetak()
+      }
+
+      function render(){
+        if (data)
       }
 
     </script>
