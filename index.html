@@ -1,201 +1,65 @@
 <!doctype html>
 <html lang="en">
 
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-                                                                                                           crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css" type="text/css" media="screen" title="no title" charset="utf-8">
-    <title>To do List</title>
-  </head>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>To do List</title>
+</head>
 
-  <body>
-    <div id="root" class="m-4">
-
-      <a href="" id="judul">
-        <h1 class="text-center display-1">To do List</h1>
-      </a>
-
-      <div id="utama" class="container p-4 bungkus-input">
-
-        <div class="d-flex justify-content-center">
-          <div class="my-4 input-group">
-            <input class="form-control" type="text" id="input-user" placeholder="Masukan Kegiatan"/>
-            <div class="input-group-append">
-              <button class="btn btn-primary" id="tombol-submit" type="submit">Submit</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- <form>
-          <div id="kotak-edit" class="input-group">
-          <input class="form-control" type="text" name="" id="input-ubah" />
+<body>
+  <!-- main site -->
+  <div id="root">
+    <!-- Header -->
+    <h1 class="my-3 my-md-5 text-center">Hello <span id="nama"></span></h1>
+    <div class="container-fluid">
+      
+      <!-- Input group -->
+      <div class="mt-1 mt-md-4 d-flex justify-content-center">
+        <div class="kotak-input input-group mb-3">
+          <input id="input-data" type="text" class="form-control" placeholder="Masukan Kegiatan"/>
           <div class="input-group-append">
-          <button class="btn btn-light" id="tombol-save">Save</button>
+            <button class="btn btn-primary" type="button" id="tombol-submit">Submit</button>
           </div>
+        </div><!-- END Input group -->
+      </div><!-- END Input group -->
+      
+      <!-- List of items -->
+      <div class="row">
+        <!-- Todo List -->
+        <div class="col-12 col-md-6 my-2 my-md-5">
+          <div class="container">
+            <ul id="sebelum-list" class="list-group my-2 my-md-5">
+            </ul>
           </div>
-          </form> -->
-
-          <div class="my-4" id="kotak-edit">
-            <div class="d-flex justify-content-center">
-              <input type="text" name="" id="input-ubah" />
-              <button class="btn btn-light" id="tombol-save">Save</button>
-            </div>
+        </div><!-- END Todo List -->
+        <!-- Finish List -->
+        <div class="col-12 col-md-6 my-2 my-md-5">
+          <div class="container">
+            <ul id="sesudah-list" class="list-group my-2 my-md-5">
+            </ul>
           </div>
-
-          <!-- <div id="pesan-tambah" class="alert alert-success" role="alert">Data berhasil ditambahkan</div> -->
-          <!-- <div id="pesan-ubah" class="alert alert-success" role="alert">Data berhasil diubah</div> -->
-          <!-- <div id="pesan-hapus" class="alert alert-success" role="alert">Data berhasil dihapus</div> -->
-
-          <div id="pesan-tambah" class="pesan alert alert-success alert-dismissible fade show" role="alert">
-            <strong id="data-pesan-tambah"></strong> Sukses di-tambah
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div id="pesan-ubah" class="pesan alert alert-success alert-dismissible fade show" role="alert">
-            <strong id="data-pesan-ubah"></strong> Sukses di-ubah menjadi <strong id="data-pesan-ubah2"></strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-
-          <div id="pesan-delete" class="pesan alert alert-success alert-dismissible fade show" role="alert">
-            <strong id="data-pesan-delete"></strong> Sukses di-hapus
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <ul id="to-do-list" class="list-group"> </ul>
-      </div>
+        </div><!-- END Finish List -->
+      </div><!-- END List of items -->
     </div>
+  </div><!-- END main site -->
 
-    <!-- Optional JavaScript -->
-    <script>
 
-      // Main Array
-      let data = []
-
-      // InputBox
-      const masukan = document.getElementById("input-user")
-      const kotakUbah = document.getElementById("input-ubah")
-      const pesanTambah = document.getElementById("data-pesan-tambah")
-      const pesanUbah = document.getElementById("data-pesan-ubah")
-      const pesanUbah2 = document.getElementById("data-pesan-ubah2")
-      const pesanDelete = document.getElementById("data-pesan-delete")
-
-      // Button Collection
-      const tombol = document.getElementById("tombol-submit")
-      const btnUbah = document.getElementsByClassName("tombolUbah")
-      const btnHapus = document.getElementsByClassName("tombolHapus")
-      const btnSimpan = document.getElementById("tombol-save")
-
-      // List Item
-      const listItem = document.getElementById("to-do-list")
-
-      localPlace = JSON.parse(localStorage.getItem('boxer'))
-      if (localPlace != null)
-        data = localPlace
-      cetak()
-
-      tombol.addEventListener("click", function () {
-        // let temp = '';
-        data.push(masukan.value)
-        // temp =  ` <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        //             <strong>${masukan.value}</strong> berhasil ditambahkan
-        //             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        //               <span aria-hidden="true">&times;</span>
-        //             </button>
-        //           </div> `
-        // mainBox.innerHTML = temp
-        localStorage.setItem('boxer', JSON.stringify(data))
-        pesanTambah.innerHTML = masukan.value
-        $('#pesan-tambah').show()
-        console.log(data)
-        cetak()
-      })
-
-      function cetak() {
-        let temp = ""
-        for (let i = 0; i < data.length; i++)
-            temp += ` <li class="list-group-item">
-                          <div class="d-flex">
-                              <p class="flex-grow-1">
-                                ${data[i]}
-                              </p>
-                              <button class="tombolUbah btn btn-warning mx-1" onclick="ubahData(${i})">Edit</button>
-                              <button class="tombolHapus btn btn-danger mx-1" onclick="hapusData(${i})">Delete</button>
-                          </div>
-                      </li> `
-        listItem.innerHTML = temp
-      }
-
-      // for(let i=0;i<data.length;i++){
-      //   btnUbah[i].addEventListener("click",function(){
-      //     $('#kotak-edit').show()
-      //     kotakUbah.value = data[i]
-      //     ubahNama = data[i]
-      //     indexData = i
-      //     console.log(ubahNama)
-      //     cetak()
-      //   })
-      // }
-
-      function ubahData(i) {
-          $('#kotak-edit').show()
-          kotakUbah.value = data[i]
-          ubahNama = data[i]
-          indexData = i
-          console.log(ubahNama)
-          cetak()
-      }
-
-      // let teUbah = $('.tombolUbah')
-      // teUbah.on("click",function(){
-      //   let temp = $(this)
-      //   console.log(temp)
-      // })
-
-      btnSimpan.addEventListener("click", function () {
-        data[indexData] = kotakUbah.value
-        localStorage.setItem('boxer', JSON.stringify(data))
-        pesanUbah.innerHTML = ubahNama
-        $('#pesan-ubah').show()
-        $('#kotak-edit').hide(1000)
-        cetak()
-      })
-
-      // for(let i=0;i<data.length;i++){
-      //   btnHapus[i].addEventListener("click", function(){
-      //     data.splice(i,1)
-      //     localStorage.setItem('boxer',JSON.stringify(data))
-      //     cetak()
-      // }
-      //   })
-
-      function hapusData(i) {
-        data.splice(i, 1)
-        localStorage.setItem('boxer', JSON.stringify(data))
-        cetak()
-      }
-
-      function render(){
-        if (data)
-      }
-
-    </script>
-      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                                                                     crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-                                                                                              crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                                                                                           crossorigin="anonymous"></script>
-  </body>
+  <!-- Optional JavaScript -->
+  <script src="./main.js"></script>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+</body>
 
 </html>
