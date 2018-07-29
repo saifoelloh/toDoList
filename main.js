@@ -37,6 +37,7 @@ btnSubmit.addEventListener("click", function () {
     arr.sebelum.push(inputData.value)
     localStorage.setItem("belajar", JSON.stringify(arr))
     render()
+    inputData.value = ""
 })
 
 function funPindahArrSebelum(i) {
@@ -69,8 +70,8 @@ function funHapusArrSesudah(i) {
 
 function render() {
     
-    let temp = '<h3 class="text-center">Todo List</h3>'
-    let temp2 = `<h3 class="text-center">Finished</h3>`
+    let temp = ``
+    let temp2 = ``
 
     if (arr.sebelum.length != 0) {
         for (let i = 0; i < arr.sebelum.length; i++){
@@ -93,7 +94,7 @@ function render() {
                     </li>`
         }
     } else {
-        temp = `Anda pengangguran`
+        temp += `<h3 class="d-flex align-items-center justify-content-center text-secondary">Anda pengangguran</h3>`
     }
 
 
@@ -118,7 +119,7 @@ function render() {
                     </li>`
         }
     } else {
-        temp2 = `Gaweanmu akeh mas`
+        temp2 = `<h3 class="d-flex align-items-center justify-content-center text-secondary">Lembur Mas</h3>`
     }
 
     listItemSebelum.innerHTML = temp
